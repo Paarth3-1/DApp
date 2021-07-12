@@ -11,8 +11,8 @@ contract Auction {
 		uint auction_price;  // current price of item
 	}
 	
-
-	uint constant itemCount = 4;
+	string public name="Auction";
+	uint constant  public itemCount = 4;
     uint[itemCount] public arrayForItems;
 	uint public itemId = 0;
 	

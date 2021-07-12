@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 const { assert, expect } = require('chai');
 const Web3 = require("web3");
-const Auction =artifacts.require('SimpleAuction')
+const Auction =artifacts.require('Auction')
 if (typeof web3 !== 'undefined') {
   // Use Mist/MetaMask's provider
  const web3 = new Web3(Web3.currentProvider);
@@ -16,31 +16,21 @@ function tokens(n) {
 
 
 contract('Auction',(accounts)=>{
-  let owner = accounts[0]
-  let bidderA = accounts[1]
-  let duration = 3600;
-  let timestampEnd
-
-let auction;
-
+let auction
 beforeEach(async function() {
-  timestampEnd = web3.eth.getBlock('latest').timestamp  +  duration; // 1 hour from now
-  auction = await Auction.new(bidderA, owner);
+auction=await Auction.deployed()
 });
 
-describe('Correct name',async()=>{
-  it('has a correct name',async()=>{
-    const name= await auction.name()
-    assert.equal(name,'Auction')
+describe('Check',async()=>{
+  it('ItemId',async()=>{
+    const itemId= await auction.itemId()
+    assert(itemId,0)
   })
-  it("Does a transaction",async()=>{
-    // const transaction=await auction.placeBid
-    const items=await auction.items()
-    ///ssert.equal(items[0].base_price,20)
+  it('Adding something',async()=>{
+    const items=await auction.getItemCount()
+    console.log(items,4)
   })
   
-
-
 })
 
 
